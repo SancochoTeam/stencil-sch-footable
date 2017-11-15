@@ -16,6 +16,33 @@ stencil-sch-footable {
   .column{
     text-align: center;
     display: inline-block;
+    padding: 5px 0px;
   }
 
+  #header{
+    background: #ccc;
+    padding: 20px 10px 20px 0px;
+  }
+  .row {
+    padding-right: 10px;
+    background-color: #eee;
+    span{
+      position: absolute;
+      right: 8px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      padding: 0px 3px;
+      margin-top: 4px;
+      height: 16px;
+    }
+  }
+  .row:nth-child(2n){
+    background-color: white;
+  }
+
+  .contentDataHiden {
+    border-top: 1px solid #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+  }
 }

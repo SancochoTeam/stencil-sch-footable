@@ -7,11 +7,11 @@ import { Component } from '@stencil/core';
 export class MyName {
 
   render() {
-    const header = ['H1','H2','H3','H4','H5','H6','H7','H8','H9','H10','H11'];
+    const header = [{key: 'H1',value: 'H1'},{key: 'H2',value: 'H2'},{key: 'H3',value: 'H3'},{key: 'H4',value: 'H4'},{key: 'H5',value: 'H5'},{key: 'H6',value: 'H6'},{key: 'H7',value: 'H7'},{key: 'H8',value: 'H8'},{key: 'H9',value: 'H9'},{key: 'H10',value: 'H10'}];
     const data = [
-      {'H1': 'C1','H2': 'C2','H3': 'C3','H4': 'C4','H5': 'C5','H6': 'C6','H7': 'C7','H8': 'C8','H9': 'C9','H10': 'C10','H11': 'C11'},
-      {'H1': 'C1','H2': 'C2','H3': 'C3','H4': 'C4','H5': 'C5','H6': 'C6','H7': 'C7','H8': 'C8','H9': 'C9','H10': 'C10','H11': 'C11'},
-      {'H1': 'C1','H2': 'C2','H3': 'C3','H4': 'C4','H5': 'C5','H6': 'C6','H7': 'C7','H8': 'C8','H9': 'C9','H10': 'C10','H11': 'C11'}
+      {'H1': 'C1','H2': 'C2','H3': 'C3','H4': 'C4','H5': 'C5','H6': 'C6','H7': 'C7','H8': 'C8','H9': 'C9','H10': 'C10'},
+      {'H1': 'C1','H2': 'C2','H3': 'C3','H4': 'C4','H5': 'C5','H6': 'C6','H7': 'C7','H8': 'C8','H9': 'C9','H10': 'C10'},
+      {'H1': 'C1','H2': 'C2','H3': 'C3','H4': 'C4','H5': 'C5','H6': 'C6','H7': 'C7','H8': 'C8','H9': 'C9','H10': 'C10'}
     ]
     return (
         <stencil-sch-footable header={header} data={data}></stencil-sch-footable>
