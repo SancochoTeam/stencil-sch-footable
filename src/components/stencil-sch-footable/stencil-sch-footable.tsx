@@ -42,25 +42,28 @@ export class StencilSchFootable {
     let getTableContent = () => (
       this.data.map((rows,index) => (
         <div onClick={() => this.handleShowHideData(index)} class="row">
-            {getCol(rows, index)}
+            {getCol(rows)}
             <span>{this.showHidenData[index] ? '+' : '-'}</span>
+            <div class="contentDataHiden" hidden={this.showHidenData[index]}>
+              {getDataHidenCol(rows)}
+            </div>
         </div>
       ))
     );
 
-    let getCol = (rows, index) => (
+    let getCol = (rows) => (
       this.showHeaders.map(item => 
         <div class="column" style={this.getWidthCol()}>
           {rows[item.key]}
-          <div class="contentDataHiden" hidden={this.showHidenData[index]}>
+          {/* <div class="contentDataHiden" hidden={this.showHidenData[index]}>
             {getDataHidenCol(rows)}
-          </div>
+          </div> */}
         </div>
       )
     );
 
     let getDataHidenCol = (rows) => (
-      this.hideHeaders.map(item => (<p>{item.value}:{rows[item.key]}</p>))
+      this.hideHeaders.map(item => (<p>{item.value}:<i>{rows[item.key]}</i></p>))
     );
 
     return (
