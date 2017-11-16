@@ -14,29 +14,34 @@ export class StencilSchFootable {
   @State() showHeaders: {key: string, value: string}[] = [];
   @State() hideHeaders: {key: string, value: string}[] = [];
   @State() showHidenData: {[id: string]: boolean} = {};
+  @State() crescentData: {[id: string]: boolean} = {}; //Order by crescent or decrescent
 
   @Event() clickElement: EventEmitter;
 
   private column  : number; 
   private stopPropagation: boolean;
-  private numRowVisib: number = 50; //number of visible rows
+  // !!!! TODO (scroll)
+  // private numRowVisib: number = 50; //number of visible rows
 
   componentWillLoad(){
-    this.showData = [...this.data.splice(0,this.numRowVisib)];
-    this.numRowVisib = (this.data.length < this.numRowVisib ) ? this.data.length : this.numRowVisib
+    this.showData = [...this.data];
+    //!!!!! TODO (scroll)
+    // this.showData = [...this.data.splice(0,this.numRowVisib)];
+    // this.numRowVisib = (this.data.length < this.numRowVisib ) ? this.data.length : this.numRowVisib
     this.resiceScreen();
   }
-  
-  @Listen('window:scroll')  
-  windowScroll = () => {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.numRowVisib < this.data.length){
-      let newRows = this.data.slice(this.numRowVisib,this.numRowVisib + 5)
-      this.showHidenData = newRows.reduce((acu, item, index) =>  Object.assign({},acu,{[index+this.numRowVisib]: true}), this.showHidenData);
-      this.showData = [...this.showData, ...newRows]
-      this.numRowVisib = this.numRowVisib + 5;
-      console.log(this.numRowVisib)
-    }
-  }
+
+  // !!!! TODO (scroll)
+  // @Listen('window:scroll')  
+  // windowScroll = () => {
+  //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.numRowVisib < this.data.length){
+  //     let newRows = this.data.slice(this.numRowVisib,this.numRowVisib + 5)
+  //     this.showHidenData = newRows.reduce((acu, item, index) =>  Object.assign({},acu,{[index+this.numRowVisib]: true}), this.showHidenData);
+  //     this.showData = [...this.showData, ...newRows]
+  //     this.numRowVisib = this.numRowVisib + 5;
+  //     console.log(this.numRowVisib)
+  //   }
+  // }
   
   @Listen('window:resize')  
   resiceScreen = () => {
@@ -46,6 +51,7 @@ export class StencilSchFootable {
     //Col to show
     this.showHeaders = this.hideHeaders.splice(0,this.column);
     this.showHidenData = this.showData.reduce((acu, item, index) =>  Object.assign({},acu,{[index]: true}), {});
+    this.crescentData = this.showData.reduce((acu, item, index) =>  Object.assign({},acu,{[index]: true}), {});
   }
   
   calculateCol = () => {
@@ -63,10 +69,28 @@ export class StencilSchFootable {
     (this.stopPropagation) ? this.stopPropagation = false : this.clickElement.emit(this.showData[index])
   }
 
+  orderBy = (key) => {
+    
+    let numCrescent = (this.crescentData[key]) ? 1 : -1;
+    this.crescentData[key] = !this.crescentData[key];
+
+    this.showData = [...this.showData.sort((a, b) => {
+      let aParse = parseInt(a[key]) || a[key]
+      let bParse = parseInt(b[key]) || b[key]
+      if (aParse > bParse) {
+        return numCrescent;
+      }
+      if (aParse < bParse ) {
+        return -numCrescent;
+      }
+      return 0;
+    })]
+  }
+
   render() {
 
     let getHeaders = () => (
-      this.showHeaders.map(item => <div class="column" style={this.getWidthCol()}>{item.value}</div>)
+      this.showHeaders.map(item => <div class="column" style={this.getWidthCol()} onClick={() => this.orderBy(item.key)}>{item.value} {String.fromCharCode((this.crescentData[item.key]) ? 0x2193 : 0x2191)}</div>)
     );
 
     let getTableContent = () => (

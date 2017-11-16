@@ -1,6 +1,10 @@
 
 stencil-sch-footable {
 
+  #table {
+    height: 100%;
+    overflow: scroll;
+  }
   .col-12 {width: 8.33%;}
   .col-11 {width: 9.09%;}
   .col-10 {width: 10%;}
@@ -24,23 +28,22 @@ stencil-sch-footable {
 
   #header{
     background: #ccc;
-    padding: 20px 10px 20px 0px;
+    padding: 20px 0px 20px 10px;
   }
   #content{
     font-weight: 100;
   }
   .row {
-    padding-right: 10px;
+    padding-left: 10px;
     border-bottom: 1px solid #ccc;
     background-color: #eee;
+    position: relative;
     span{
-      z-index: 100;
       position: absolute;
-      right: 8px;
+      left: 8px;
       border: 1px solid #ccc;
       border-radius: 50%;
       margin-top: 4px;
-      height: 17px;
       width: 15px;
       padding-left: 5px;
     }
@@ -53,6 +56,7 @@ stencil-sch-footable {
     border-top: 1px solid #ccc;
     margin: 0px -10px 10px 0px;
     text-align: center;
+    width: 100%;
     // margin-top: 5px;
     // margin-left: 10px;
     // margin-bottom: 10px;
