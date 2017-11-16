@@ -1,5 +1,6 @@
 
 stencil-sch-footable {
+
   .col-12 {width: 8.33%;}
   .col-11 {width: 9.09%;}
   .col-10 {width: 10%;}
@@ -17,6 +18,8 @@ stencil-sch-footable {
     text-align: center;
     display: inline-block;
     padding: 5px 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   #header{
@@ -29,8 +32,9 @@ stencil-sch-footable {
   .row {
     padding-right: 10px;
     border-bottom: 1px solid #ccc;
-    // background-color: #eee;
+    background-color: #eee;
     span{
+      z-index: 100;
       position: absolute;
       right: 8px;
       border: 1px solid #ccc;
@@ -41,13 +45,13 @@ stencil-sch-footable {
       padding-left: 5px;
     }
   }
-  // .row:nth-child(2n){
-  //   background-color: white;
-  // }
+  .row:nth-child(2n){
+    background-color: white;
+  }
 
   .contentDataHiden {
     border-top: 1px solid #ccc;
-    margin: 5px 0px 10px 10px;
+    margin: 0px -10px 10px 0px;
     text-align: center;
     // margin-top: 5px;
     // margin-left: 10px;
@@ -60,6 +64,7 @@ stencil-sch-footable {
     }
     i{
       font-weight: 100;
+      font-style: normal;
     }
   }
 }
